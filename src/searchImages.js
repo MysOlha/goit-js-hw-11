@@ -16,9 +16,9 @@ export default class SearchImages {
     .then((data) => {
         console.log(data.total)
         if (data.total === 0 ){
-            Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
         } else {
-            Notiflix.Notify.success(`Hooray! We found ${data.total} images`)
+         Notiflix.Notify.success(`Hooray! We found ${data.total} images`)
         }
         this.nextPage()
 

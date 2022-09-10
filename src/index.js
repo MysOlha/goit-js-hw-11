@@ -25,10 +25,15 @@ resetImages()
  if(searchImages.newName === ''){
    return noImages()
  }
-
 searchImages.reset() 
 
-searchImages.fetchImages().then(findGalleryOfImages).catch(noImages)
+searchImages.fetchImages().then(() => {
+  findGalleryOfImages
+  
+}
+).catch(noImages)
+
+
 loadMoreBtn.classList.toggle('is-hidden')
 }
 
