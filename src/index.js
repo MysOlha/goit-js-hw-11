@@ -10,7 +10,6 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 // new SimpleLightbox ('.photo-card a', {captionsData: 'alt', captionsDelay: 250})
 
-
 const searchImages = new SearchImages();
 
 submitForm.addEventListener('submit', findImage)
@@ -27,14 +26,10 @@ resetImages()
  }
 searchImages.reset() 
 
-searchImages.fetchImages().then(() => {
-  findGalleryOfImages
-  
-}
-).catch(noImages)
+searchImages.fetchImages().then(findGalleryOfImages).catch(noImages)
 
 
-loadMoreBtn.classList.toggle('is-hidden')
+
 }
 
 

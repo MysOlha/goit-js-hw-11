@@ -1,4 +1,5 @@
 import Notiflix from 'notiflix'
+const loadMoreBtn = document.querySelector('.load-more');
 
 export default class SearchImages {
     constructor(){
@@ -17,8 +18,10 @@ export default class SearchImages {
         console.log(data.total)
         if (data.total === 0 ){
          Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+         loadMoreBtn.classList.add('is-hidden')
         } else {
          Notiflix.Notify.success(`Hooray! We found ${data.total} images`)
+         loadMoreBtn.classList.remove('is-hidden')
         }
         this.nextPage()
 
