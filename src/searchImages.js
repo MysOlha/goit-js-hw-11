@@ -1,6 +1,8 @@
 import Notiflix from 'notiflix'
 import axios from 'axios';
 const loadMoreBtn = document.querySelector('.load-more');
+const endOfResults = document.querySelector('.end-of-results')
+
 
 export default class SearchImages {
   constructor(){
@@ -20,12 +22,18 @@ async fetchImages(){
         if (data.data.total === 0 ){
          Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
          loadMoreBtn.classList.add('is-hidden')
+         endOfResults.classList.add('is-hidden')
+        } else if (this.page >= data.data.total / 40) {
+         Notiflix.Notify.success(`Hooray! We found ${data.data.total} images`)
+         loadMoreBtn.classList.add('is-hidden')
+         endOfResults.classList.remove('is-hidden')
         } else {
          Notiflix.Notify.success(`Hooray! We found ${data.data.total} images`)
          loadMoreBtn.classList.remove('is-hidden')
+         endOfResults.classList.add('is-hidden')
         }
+        
         this.nextPage()
-
         return data.data.hits;
     })
     .catch(error => console.log(error))
@@ -34,10 +42,9 @@ async fetchImages(){
  
  nextPage(){
     this.page +=1
- 
- }
+  }
 
- reset(){
+  reset(){
     this.page = 1
  }
 

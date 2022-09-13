@@ -8,6 +8,9 @@ import axios from 'axios';
 const submitForm = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+const endOfResults = document.querySelector('.end-of-results')
+
+
 
 // new SimpleLightbox ('.photo-card a', {captionsData: 'alt', captionsDelay: 250})
 
@@ -23,7 +26,7 @@ resetImages()
  searchImages.newName = e.currentTarget.elements.searchQuery.value.trim()
 
  if(searchImages.newName === ''){
-   return noImages()
+   return noImages() 
  }
 searchImages.reset() 
 
@@ -33,6 +36,9 @@ searchImages.fetchImages().then(findGalleryOfImages).catch(noImages)
 
 function loadMore() {
  searchImages.fetchImages().then(findGalleryOfImages)
+
+
+ 
 }
    
 function findGalleryOfImages(images){
@@ -77,5 +83,6 @@ function resetImages(){
 
 function noImages(){
   Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+
 }
 

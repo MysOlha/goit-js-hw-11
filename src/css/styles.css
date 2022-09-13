@@ -95,3 +95,7 @@ input {
 .is-hidden {
   display: none;
 }
+
+.end-of-results {
+  text-align: center;
+}
