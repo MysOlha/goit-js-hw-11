@@ -3,6 +3,7 @@ import Notiflix from 'notiflix';
 import SearchImages from './searchImages';
 import SimpleLightbox from "simplelightbox"
 import "simplelightbox/dist/simple-lightbox.min.css";
+import axios from 'axios';
 
 const submitForm = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
@@ -27,9 +28,6 @@ resetImages()
 searchImages.reset() 
 
 searchImages.fetchImages().then(findGalleryOfImages).catch(noImages)
-
-
-
 }
 
 
@@ -43,11 +41,14 @@ gallery.insertAdjacentHTML('beforeend', allImages(images))
 
 
 function allImages(images){
+
   return images
   .map(({webformatURL, largeImageURL, likes, views, comments, downloads, tags}) => {
     return `
     <div class="photo-card">
-    <a href=${largeImageURL}><img src="${webformatURL}" alt="${tags}" loading="lazy"  width=320px height=500px;/></a>
+    <a href=${largeImageURL}>
+    <img src="${webformatURL}" alt="${tags}" loading="lazy"  width=320px height=500px;/>
+    </a>
 
     <div class="info">
       <p class="info-item">
@@ -67,6 +68,7 @@ function allImages(images){
     </div>`
   })
   .join('')
+
 }
 
 function resetImages(){

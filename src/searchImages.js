@@ -1,31 +1,32 @@
 import Notiflix from 'notiflix'
+import axios from 'axios';
 const loadMoreBtn = document.querySelector('.load-more');
 
 export default class SearchImages {
-    constructor(){
+  constructor(){
   this.name = ''
   this.page = 1
     }
 
- fetchImages(){
+async fetchImages(){
     // console.log(this)
  const BASE_URL = 'https://pixabay.com/api/?key=29767436-14c23983d91939ba59ac81ecb'
  const BASE_PARAMS = '&image_type=photo&orientation=horizontal&safesearch=true&per_page=40'
 
- return fetch(`${BASE_URL}&q=${this.name}${BASE_PARAMS}&page=${this.page}`)
-    .then(response => response.json())
+ return await axios.get(`${BASE_URL}&q=${this.name}${BASE_PARAMS}&page=${this.page}`)
+   //  .then(response => response.json())
     .then((data) => {
-        console.log(data.total)
-        if (data.total === 0 ){
+        console.log(data.data.total)
+        if (data.data.total === 0 ){
          Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
          loadMoreBtn.classList.add('is-hidden')
         } else {
-         Notiflix.Notify.success(`Hooray! We found ${data.total} images`)
+         Notiflix.Notify.success(`Hooray! We found ${data.data.total} images`)
          loadMoreBtn.classList.remove('is-hidden')
         }
         this.nextPage()
 
-        return data.hits;
+        return data.data.hits;
     })
     .catch(error => console.log(error))
    
